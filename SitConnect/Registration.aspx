@@ -37,6 +37,21 @@
             document.getElementById("lbl_pwdchecker").innerHTML = "Excellent";
             document.getElementById("lbl_pwdchecker").style.color = "Blue";
         }
+        function validateCreditCard() {
+            var str = document.getElementById('<%=tb_CreditCard.ClientID %>').value;
+            if (str.length != 16) {
+                document.getElementById("lbl_CCchecker").innerHTML = "Credit Card number is 16 digits";
+                document.getElementById("lbl_CCchecker").style.color = "Red";
+                return ("too_short");
+            }
+            else if (str.search(/[^0-9]/) > -1) {
+                document.getElementById("lbl_CCchecker").innerHTML = "Must be numbers";
+                document.getElementById("lbl_CCchecker").style.color = "Red";
+                return ("numbers");
+            }
+            document.getElementById("lbl_CCchecker").innerHTML = "Valid Credit Card Number";
+            document.getElementById("lbl_CCchecker").style.color = "Blue";
+        }
     </script>
 </head>
 <body>
@@ -50,7 +65,7 @@
                 <p>Email Address : <asp:TextBox ID="tb_Email" TextMode="Email" runat="server" Height="25px" Width="300px"></asp:TextBox></p>
                 <p>Password : <asp:TextBox ID="tb_Password" runat="server" Height="25px" Width="137px" onkeyup="javascript:validate()"></asp:TextBox><asp:Label ID="lbl_pwdchecker" runat="server" Text="" Height="25px" ></asp:Label></p>
                 <p><asp:Button ID="btnCheckPwd" runat="server" Text="Check Password" onclick="btn_checkPassword_Click" Height="27px" Width="300px"/><asp:Label ID="lbl_pwdchecker2" runat="server" Text="" Height="25px" ></asp:Label></p>
-                <p>Credit Card Number : <asp:TextBox ID="tb_CreditCard" runat="server" Height="25px" Width="200px"></asp:TextBox></p>
+                <p>Credit Card Number : <asp:TextBox ID="tb_CreditCard" runat="server" Height="25px" Width="200px" onkeyup="javascript:validateCreditCard()"></asp:TextBox><asp:Label ID="lbl_CCchecker" runat="server" Text="" Height="25px" ></asp:Label></p>
                 <p>Date of Birth : <asp:Calendar ID="DOB" runat="server"></asp:Calendar></p>
                 <p>Photo : <asp:FileUpload ID="PhotoUpload" runat="server" /></p>
                 
